@@ -37,8 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage',
+    'homepage.apps.HomepageConfig',
+    'main.apps.MainConfig',
+    'crispy_forms',
+    'crispy_bootstrap5'
+    
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISTPY_TEMPLATE_PACK ="bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,9 +83,16 @@ WSGI_APPLICATION = 'projectVDBAV.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'de6dur0rf9o9nd',
+        'USER': 'bboiedpgkialfl',
+        'PASSWORD': '2b2af31fc07e87f1ec08b6ee7f0637b434bb6560bff30a762fc8c9338401715f',
+        'HOST':'ec2-3-234-131-8.compute-1.amazonaws.com',
+        'PORT':'5432',
+    
+    
     }
+
 }
 
 
@@ -122,3 +136,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL ='/home'
+LOGOUT_REDIRECT_URL='/login'

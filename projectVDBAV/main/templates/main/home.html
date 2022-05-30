@@ -1,0 +1,73 @@
+{% extends 'main/base.html'%}
+{% block title%} Home Page {% endblock %}
+{% block content%}
+
+
+
+<div class="text-center mx-auto">
+<form method="post" name="timeinn">
+    {% csrf_token%}
+    <button type="submit"  class="btn btn-success" name="timeinn" value="timeinn">PARK IN</button>
+    <!-- <button type="submit"  class="btn btn-danger" name="timeout" value="timeout">DEPART</button>-->
+</form>
+<div>
+
+
+
+
+{% for post in  posts %}
+{%if user == post.Owner%}
+<div class="card mt-2"> 
+    <div class="card-header"><strong>@{{post.Owner.username}}</strong></div>
+    <div class="card-body d-flex flex-row justify-content-between">
+        <div>
+            <img src="" alt="Italian Trulli"><h5 class="card-title">CAR: {{post.Carname}}</h5>
+                <p><h6 class="card-title">PLATE NUMBER:</h6>{{post.Platenumber}}</p>
+                <p><h6 class="card-title">COLOR:</h6> {{post.Carcolor}}</p>
+        </div>
+        <div>
+           
+                <form method="post"> {% csrf_token%}
+
+                    <button type="submit" class="btn btn-danger" name="post-id"value="{{post.id}}"> Delete</button>
+
+                </form>
+            
+        </div>
+    </div>
+        <div class="card-footer text-muted"> {{post.created_at}}
+        </div>
+    </div>  
+    {%endif%}
+    {%if user.is_staff%}
+    <div class="card mt-2"> 
+        <div class="card-header"><strong>@{{post.Owner.username}}</strong></div>
+        <div class="card-body d-flex flex-row justify-content-between">
+            <div>
+                <img src="projectVDBAV\main\templates\main\car.jpg" alt="Italian Trulli"><h5 class="card-title">CAR: {{post.Carname}}</h5>
+                    <p><h6 class="card-title">PLATE NUMBER:</h6>{{post.Platenumber}}</p>
+                    <p><h6 class="card-title">COLOR:</h6> {{post.Carcolor}}</p>
+            </div>
+         
+            <div>
+               
+                    <form method="post"> {% csrf_token%}
+    
+                        <button type="submit" class="btn btn-danger" name="post-id"value="{{post.id}}"> Delete</button>
+    
+                    </form>
+                    
+                
+            </div>
+        </div>
+            <div class="card-footer text-muted"> {{post.created_at}}
+            </div>
+        </div>  
+    {%endif%}
+    
+    no car? add what car you're parking <a href="/add-car">here<a>
+
+{% endfor %}
+
+
+{%endblock%}
